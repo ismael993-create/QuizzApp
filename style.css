@@ -105,7 +105,7 @@ body {
 
     .blue {
         width: 120px;
-        height: 530px !important;
+        height: stretch !important;
     }
     
 }
