@@ -53,7 +53,7 @@ body {
 
 .blue {
     width: 150px;
-    height: -webkit-fill-available;
+    height: stretch;
     background-color: #1e90ff;
     border-radius: 5px;
     display: flex;
