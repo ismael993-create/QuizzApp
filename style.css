@@ -21,7 +21,7 @@ body {
 }
 
 .quiz_card {
-    width: 25rem;
+    width: 35rem;
     background-color: #b7e1d7 !important;
 }
 
@@ -95,4 +95,12 @@ body {
 @keyframes blink {
     0%, 100% { background-color: inherit; }
     50%       { background-color: #28a745; }
+}
+
+
+@media screen and (max-width: 570px) {
+    .quiz_card {
+        width: 20rem;
+    }
+    
 }
