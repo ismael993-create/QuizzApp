@@ -53,7 +53,7 @@ body {
 
 .blue {
     width: 150px;
-    height: webkit-fill-available;
+    height: 480px;
     background-color: #1e90ff;
     border-radius: 5px;
     display: flex;
@@ -105,7 +105,7 @@ body {
 
     .blue {
         width: 120px;
-        height: 450px !important;
+        height: 490px !important;
     }
     
 }
