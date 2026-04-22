@@ -151,6 +151,63 @@ let questions = [
     rightAnswer: 3,
   },
 
+   {
+    question: "Welches Land hat die längste Küstenlinie der Welt?",
+    answers1: "Australien",
+    answers2: "Kanada",
+    answers3: "Russland",
+    answers4: "USA",
+    rightAnswer: 2,
+  },
+  {
+    question: "Wie viele Knochen hat ein erwachsener Mensch in der Regel?",
+    answers1: "198",
+    answers2: "206",
+    answers3: "210",
+    answers4: "201",
+    rightAnswer: 2,
+  },
+  {
+    question: "Welches Gas macht den größten Anteil der Erdatmosphäre aus?",
+    answers1: "Sauerstoff",
+    answers2: "Kohlendioxid",
+    answers3: "Stickstoff",
+    answers4: "Argon",
+    rightAnswer: 3,
+  },
+  {
+    question: "Wer malte die Decke der Sixtinischen Kapelle?",
+    answers1: "Leonardo da Vinci",
+    answers2: "Michelangelo",
+    answers3: "Raffael",
+    answers4: "Donatello",
+    rightAnswer: 2,
+  },
+  {
+    question: "Was ist die Quadratwurzel von 144?",
+    answers1: "10",
+    answers2: "11",
+    answers3: "12",
+    answers4: "13",
+    rightAnswer: 3,
+  },
+  {
+    question: "Welcher Ozean ist der größte der Erde?",
+    answers1: "Atlantischer Ozean",
+    answers2: "Indischer Ozean",
+    answers3: "Arktischer Ozean",
+    answers4: "Pazifischer Ozean",
+    rightAnswer: 4,
+  },
+  {
+    question: "Wie lautet die Hauptstadt von Kanada?",
+    answers1: "Toronto",
+    answers2: "Vancouver",
+    answers3: "Ottawa",
+    answers4: "Montreal",
+    rightAnswer: 3,
+  },
+
 ];
 
 function init() {
