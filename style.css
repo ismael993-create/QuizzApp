@@ -110,5 +110,9 @@ body {
         height: auto !important;
         min-height: 100%;
     }
+
+    .container {
+           margin-top: -100px;
+    }
     
 }
