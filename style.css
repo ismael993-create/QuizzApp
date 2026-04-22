@@ -21,10 +21,11 @@ body {
     align-items: center;
         gap: 10px;
 }
-
 .quiz_card {
     width: 35rem;
+    max-width: 100%; 
     background-color: #b7e1d7 !important;
+    overflow: hidden;
 }
 
 .quiz_answer:hover  {   
@@ -58,6 +59,18 @@ body {
 
 .endScreen .progress {
     width: 100%;
+}
+
+.endScreen img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.endScreen > div {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .blue {
@@ -110,9 +123,12 @@ body {
 
 
 @media screen and (max-width: 570px) {
-    .quiz_card {
-        width: 20rem;
-    }
+  .quiz_card {
+    width: 20rem;
+    max-width: 100%; 
+    background-color: #b7e1d7 !important;
+    overflow: hidden;
+}
 
     .blue {
         width: 120px;
