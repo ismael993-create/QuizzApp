@@ -1,5 +1,9 @@
 let currentQuestion = 0;
 let correctAnswers = 0;
+let Audio_success = new Audio("./sound/right_answer.mp3");
+let Audio_fail = new Audio("./sound/wrong_answer.mp3");
+let Audio_end = new Audio("./sound/finish.mp3");
+
 
 let questions = [
   {
@@ -156,12 +160,19 @@ function init() {
 }
 
 function showQuestion() {
+
+let percent = (currentQuestion + 1)  / questions.length * 100; // Prozentualer Fortschritt berechnen
+percent = Math.round(percent) + '%'; // Prozent auf ganze Zahl runden
+
   let question = questions[currentQuestion];
   document.getElementById("questionText").innerHTML = question["question"];
   document.getElementById("answer1").innerHTML = question["answers1"];
   document.getElementById("answer2").innerHTML = question["answers2"];
   document.getElementById("answer3").innerHTML = question["answers3"];
   document.getElementById("answer4").innerHTML = question["answers4"];
+  document.getElementById('progress_bar').style.width = percent; // Fortschrittsbalken aktualisieren
+  document.getElementById('progress_prozent').innerHTML = percent; // Prozentzahl im Fortschrittsbalken aktualisieren
+
 }
 
 function answer(selection) {
@@ -169,18 +180,17 @@ function answer(selection) {
   let selectedQuestionNumber = selection.slice(-1); // Letzte Ziffer der ID extrahieren z.B "answer2" -> "2"
   let rightId = `answer${question["rightAnswer"]}`; // Richtige Antwort ID rekonstruieren, z.B. "answer3" für rightAnswer = 3
 
-
   if (selectedQuestionNumber == question["rightAnswer"]) {  // == statt ===, da selectedQuestionNumber ein String ist und question["rightAnswer"] eine Zahl
     document.getElementById(selection).classList.add("bg-success");
     correctAnswers++;
+    Audio_success.play();
   } else {
     document.getElementById(selection).classList.add("bg-danger");
+    Audio_fail.play();
     // Richtige Antwort ID rekonstruieren und blinken lassen
     document.getElementById(rightId).classList.add("blink_green");// parentNode (wurde wieder entfernt) (Elternelement), da die Hintergrundfarbe auf dem übergeordneten Element (z.B. einem div) angewendet wird, nicht direkt auf dem Button (card quiz_answer)
   };
-
 document.getElementById("next-button").disabled = false; // Nächster Button aktivieren
-
 }
 
 
@@ -205,6 +215,7 @@ function nextQuestion() {
        document.getElementById('end-screen').style.display = ''; // Endscreen anzeigen
        document.getElementById('question-body').style.display = 'none'; // Quiz ausblenden
        document.getElementById('order').style.display = 'none'; // Order ausblenden
+       Audio_end.play();
        updateCorrectAnswers() ;
     }
 
@@ -235,4 +246,4 @@ function restartQuiz() {
 
 function updateCorrectAnswers() {
     document.getElementById("correct-answers").innerHTML = correctAnswers;
-};
+}; 
