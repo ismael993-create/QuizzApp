@@ -1,4 +1,5 @@
 let currentQuestion = 0;
+let correctAnswers = 0;
 
 let questions = [
   {
@@ -171,6 +172,7 @@ function answer(selection) {
 
   if (selectedQuestionNumber == question["rightAnswer"]) {  // == statt ===, da selectedQuestionNumber ein String ist und question["rightAnswer"] eine Zahl
     document.getElementById(selection).classList.add("bg-success");
+    correctAnswers++;
   } else {
     document.getElementById(selection).classList.add("bg-danger");
     // Richtige Antwort ID rekonstruieren und blinken lassen
@@ -220,6 +222,7 @@ function resetButtons() {
 
 function restartQuiz() {
     currentQuestion = 0;
+    correctAnswers = 0;
     document.getElementById("question-Number").innerHTML = currentQuestion + 1;
     document.getElementById("next-button").disabled = true;
     document.getElementById('end-screen').style.display = 'none'; // Endscreen ausblenden
@@ -231,12 +234,5 @@ function restartQuiz() {
 
 
 function updateCorrectAnswers() {
-    let correctAnswers = 0;
-    for (let i = 0; i < questions.length; i++) {
-        let rightId = `answer${questions[i]["rightAnswer"]}`;
-        if (document.getElementById(rightId).classList.contains("bg-success")) {
-            correctAnswers++;
-        }
-    }
     document.getElementById("correct-answers").innerHTML = correctAnswers;
 };
