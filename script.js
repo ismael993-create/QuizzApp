@@ -4,7 +4,6 @@ let Audio_success = new Audio("./sound/right_answer.mp3");
 let Audio_fail = new Audio("./sound/wrong_answer.mp3");
 let Audio_end = new Audio("./sound/finish.mp3");
 
-
 let questions = [
   {
     question: "Was ist die Hauptstadt von Frankreich?",
@@ -103,7 +102,8 @@ let questions = [
     rightAnswer: 3,
   },
   {
-    question: "Welcher Planet hat die meisten Monde im Sonnensystem (Stand aktuell)?",
+    question:
+      "Welcher Planet hat die meisten Monde im Sonnensystem (Stand aktuell)?",
     answers1: "Saturn",
     answers2: "Jupiter",
     answers3: "Uranus",
@@ -119,7 +119,8 @@ let questions = [
     rightAnswer: 4,
   },
   {
-    question: "Wie nennt man den Prozess, bei dem Pflanzen Lichtenergie in chemische Energie umwandeln?",
+    question:
+      "Wie nennt man den Prozess, bei dem Pflanzen Lichtenergie in chemische Energie umwandeln?",
     answers1: "Atmung",
     answers2: "Photosynthese",
     answers3: "Verdunstung",
@@ -151,7 +152,7 @@ let questions = [
     rightAnswer: 3,
   },
 
-   {
+  {
     question: "Welches Land hat die längste Küstenlinie der Welt?",
     answers1: "Australien",
     answers2: "Kanada",
@@ -207,7 +208,6 @@ let questions = [
     answers4: "Montreal",
     rightAnswer: 3,
   },
-
 ];
 
 function init() {
@@ -217,9 +217,8 @@ function init() {
 }
 
 function showQuestion() {
-
-let percent = (currentQuestion + 1)  / questions.length * 100; // Prozentualer Fortschritt berechnen
-percent = Math.round(percent) + '%'; // Prozent auf ganze Zahl runden
+  let percent = ((currentQuestion + 1) / questions.length) * 100; // Prozentualer Fortschritt berechnen
+  percent = Math.round(percent) + "%"; // Prozent auf ganze Zahl runden
 
   let question = questions[currentQuestion];
   document.getElementById("questionText").innerHTML = question["question"];
@@ -227,9 +226,8 @@ percent = Math.round(percent) + '%'; // Prozent auf ganze Zahl runden
   document.getElementById("answer2").innerHTML = question["answers2"];
   document.getElementById("answer3").innerHTML = question["answers3"];
   document.getElementById("answer4").innerHTML = question["answers4"];
-  document.getElementById('progress_bar').style.width = percent; // Fortschrittsbalken aktualisieren
-  document.getElementById('progress_prozent').innerHTML = percent; // Prozentzahl im Fortschrittsbalken aktualisieren
-
+  document.getElementById("progress_bar").style.width = percent; // Fortschrittsbalken aktualisieren
+  document.getElementById("progress_prozent").innerHTML = percent; // Prozentzahl im Fortschrittsbalken aktualisieren
 }
 
 function answer(selection) {
@@ -237,7 +235,8 @@ function answer(selection) {
   let selectedQuestionNumber = selection.slice(-1); // Letzte Ziffer der ID extrahieren z.B "answer2" -> "2"
   let rightId = `answer${question["rightAnswer"]}`; // Richtige Antwort ID rekonstruieren, z.B. "answer3" für rightAnswer = 3
 
-  if (selectedQuestionNumber == question["rightAnswer"]) {  // == statt ===, da selectedQuestionNumber ein String ist und question["rightAnswer"] eine Zahl
+  if (selectedQuestionNumber == question["rightAnswer"]) {
+    // == statt ===, da selectedQuestionNumber ein String ist und question["rightAnswer"] eine Zahl
     document.getElementById(selection).classList.add("bg-success");
     correctAnswers++;
     Audio_success.play();
@@ -245,62 +244,69 @@ function answer(selection) {
     document.getElementById(selection).classList.add("bg-danger");
     Audio_fail.play();
     // Richtige Antwort ID rekonstruieren und blinken lassen
-    document.getElementById(rightId).classList.add("blink_green");// parentNode (wurde wieder entfernt) (Elternelement), da die Hintergrundfarbe auf dem übergeordneten Element (z.B. einem div) angewendet wird, nicht direkt auf dem Button (card quiz_answer)
-  };
-document.getElementById("next-button").disabled = false; // Nächster Button aktivieren
+    document.getElementById(rightId).classList.add("blink_green"); // parentNode (wurde wieder entfernt) (Elternelement), da die Hintergrundfarbe auf dem übergeordneten Element (z.B. einem div) angewendet wird, nicht direkt auf dem Button (card quiz_answer)
+  }
+  document.getElementById("next-button").disabled = false; // Nächster Button aktivieren
+
+  document.querySelectorAll(".quiz_answer").forEach((el) => {
+    el.style.pointerEvents = "none";
+  });
+  document.getElementById("next-button").disabled = false;
 }
 
-
-
 function nextQuestion() {
-    document.getElementById("question-Number").innerHTML = currentQuestion + 2; // +1 für die nächste Frage, +1 da currentQuestion bei 0 beginnt
-    if (currentQuestion < questions.length - 1) { // Ohne -1 würde er nach Frage 8 noch eine Frage 9 laden wollen – die existiert nicht → Fehler.
-        currentQuestion++;
-        
-        // document.getElementById("answer1").classList.remove("bg-success", "bg-danger", "blink_green");
-        // document.getElementById("answer2").classList.remove("bg-success", "bg-danger", "blink_green");
-        // document.getElementById("answer3").classList.remove("bg-success", "bg-danger", "blink_green");
-        // document.getElementById("answer4").classList.remove("bg-success", "bg-danger", "blink_green");
+  document.getElementById("question-Number").innerHTML = currentQuestion + 2; // +1 für die nächste Frage, +1 da currentQuestion bei 0 beginnt
+  if (currentQuestion < questions.length - 1) {
+    // Ohne -1 würde er nach Frage 8 noch eine Frage 9 laden wollen – die existiert nicht → Fehler.
+    currentQuestion++;
 
-        // so spricht man mehrere Elemente an, ohne sie einzeln aufzählen zu müssen wie oben siehe funktion resetButtons()
-        resetButtons();
-       
-         showQuestion();
- 
-    } else {
-        // Letzte Frage erreicht
-       document.getElementById('end-screen').style.display = ''; // Endscreen anzeigen
-       document.getElementById('question-body').style.display = 'none'; // Quiz ausblenden
-       document.getElementById('order').style.display = 'none'; // Order ausblenden
-       Audio_end.play();
-       updateCorrectAnswers() ;
-    }
+    // document.getElementById("answer1").classList.remove("bg-success", "bg-danger", "blink_green");
+    // document.getElementById("answer2").classList.remove("bg-success", "bg-danger", "blink_green");
+    // document.getElementById("answer3").classList.remove("bg-success", "bg-danger", "blink_green");
+    // document.getElementById("answer4").classList.remove("bg-success", "bg-danger", "blink_green");
 
-    document.getElementById("next-button").disabled = true;
+    // so spricht man mehrere Elemente an, ohne sie einzeln aufzählen zu müssen wie oben siehe funktion resetButtons()
+    resetButtons();
+    document.querySelectorAll(".quiz_answer").forEach((el) => {
+      el.style.pointerEvents = "";
+    });
 
-   
-};
+    showQuestion();
+  } else {
+    // Letzte Frage erreicht
+    document.getElementById("end-screen").style.display = ""; // Endscreen anzeigen
+    document.getElementById("question-body").style.display = "none"; // Quiz ausblenden
+    document.getElementById("order").style.display = "none"; // Order ausblenden
+    Audio_end.play();
+    updateCorrectAnswers();
+  }
+
+  document.getElementById("next-button").disabled = true;
+}
 
 function resetButtons() {
-         document.querySelectorAll("#answer1, #answer2, #answer3, #answer4").forEach((element) => {
-            element.classList.remove("bg-success", "bg-danger", "blink_green");
-        });
-    
-};
+  document
+    .querySelectorAll("#answer1, #answer2, #answer3, #answer4")
+    .forEach((element) => {
+      element.classList.remove("bg-success", "bg-danger", "blink_green");
+    });
+}
 
 function restartQuiz() {
-    currentQuestion = 0;
-    correctAnswers = 0;
-    document.getElementById("question-Number").innerHTML = currentQuestion + 1;
-    document.getElementById("next-button").disabled = true;
-    document.getElementById('end-screen').style.display = 'none'; // Endscreen ausblenden
-    document.getElementById('question-body').style.display = 'block'; // Quiz anzeigen
-    document.getElementById('order').style.display = '';
-    resetButtons();
-    showQuestion();
-};
-
+  currentQuestion = 0;
+  correctAnswers = 0;
+  document.getElementById("question-Number").innerHTML = currentQuestion + 1;
+  document.getElementById("next-button").disabled = true;
+  document.getElementById("end-screen").style.display = "none"; // Endscreen ausblenden
+  document.getElementById("question-body").style.display = "block"; // Quiz anzeigen
+  document.getElementById("order").style.display = "";
+  document.querySelectorAll(".quiz_answer").forEach((el) => {
+    el.style.pointerEvents = "";
+  });
+  resetButtons();
+  showQuestion();
+}
 
 function updateCorrectAnswers() {
-    document.getElementById("correct-answers").innerHTML = correctAnswers;
-}; 
+  document.getElementById("correct-answers").innerHTML = correctAnswers;
+}
